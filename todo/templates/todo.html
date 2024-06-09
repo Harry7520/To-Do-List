@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+</head>
+
+<body>
+    <div class="todo-box">
+        <div class="todo">
+            <div class="todo-header">
+                <h2>To-Do List</h2>
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="text" name="title" placeholder="Title (note:you can write 70 letters)" maxlength="70" required />
+                    <button class="btn" type="submit">+</button>
+                </form>
+            </div>
+            <div class="todo-body">
+                {% for t in todo %}
+                <div class="todo-title">
+                    <input type="checkbox" id="checkbox{{t.id}}" data-todo-id="{{ t.id }}"/>
+                    <p id="text{{t.id}}">{{t.title}}</p>
+                    <a href="/title/delete/{{t.id}}"><span class="material-icons-outlined" style="color:red;">delete</span></a>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="todo-footer">
+                <P>2024|developed by Htoo Myat Aung</P>
+                <a href="/title/all/delete"><button type="submit" onclick="return confirm('Are you sure?');">All Delete</button></a>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+       document.addEventListener('DOMContentLoaded', function() {
+    const checkboxes = document.querySelectorAll('.todo-title input[type="checkbox"]');
+    
+    checkboxes.forEach(function(checkbox) {
+        const text = checkbox.nextElementSibling;
+        const todoId = checkbox.dataset.todoId;
+        
+        // Use unique key for each checkbox
+        const localStorageKey = 'isChecked_todo_' + todoId;
+        
+        // Check localStorage for saved state
+        const isChecked = localStorage.getItem(localStorageKey) === 'true';
+        if (isChecked) {
+            checkbox.checked = true;
+            text.classList.add('check');
+        }
+        
+        checkbox.addEventListener('change', function() {
+            if (this.checked) {
+                text.classList.add('check');
+            } else {
+                text.classList.remove('check');
+            }
+            
+            // Save state to localStorage using unique key
+            localStorage.setItem(localStorageKey, this.checked);
+        });
+    });
+});
+    </script>
+
+</body>
+
+</html>

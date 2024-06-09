@@ -1,0 +1,134 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+.todo-box{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    width:100%;
+    background:linear-gradient(60deg,lightblue,skyblue)
+}
+
+.todo{
+    min-width:30rem;
+    width:40rem;
+    height:40rem;
+    overflow:hidden;
+    display:grid;
+    grid-template-rows: 8rem 28rem 4rem;
+    grid-template-areas: 
+    't'
+    'b'
+    'f';
+    border:1px solid black;
+    border-radius:2%;
+    box-shadow:1rem 0.5rem 3rem 0.1rem rgb(44, 44, 44);
+}
+
+::-webkit-scrollbar{
+    display:none;
+}
+
+.todo-header{
+    grid-area:t;
+    background:linear-gradient(120deg,yellow,rgb(0, 0, 0))
+}
+
+.todo-header > h2{
+    margin:1rem 0 0.5rem 2rem;
+}
+
+.todo-header > form{
+    display:flex;
+    justify-content:space-between;
+    padding:20px;
+}
+
+.todo-header > form > input{
+    width:25rem;
+    height:2.5rem;
+    border-radius:30px;
+    padding:0 10px;
+}
+
+.todo-header > form > .btn{
+    font-size:30px;
+    width:5rem;
+    height:2.5rem;
+    transition:1s;
+    border:1px solid black;
+    cursor:pointer;
+    background:linear-gradient(120deg,rgb(212, 39, 39),rgb(211, 93, 113));
+    color:#fff;
+}
+
+.todo-header > form > .btn:hover{
+    transform:scale(1.2);
+    border-radius:10px;
+}
+
+.todo-body{
+    grid-area:b;
+    overflow-y:auto;
+    background:#fff;
+}
+
+.todo-body > .todo-title{
+    display:grid;
+    grid-template-columns:3rem 32rem 3rem;
+    grid-template-areas:
+    'c t b';
+    padding:0 20px;
+    min-height:3rem;
+    height:auto;
+    width:40rem;
+    align-items:center;
+    background:rgb(233, 230, 230);
+    border-bottom:1px solid black;
+}
+
+.todo-body > .todo-title > input{
+    grid-area:c;
+}
+
+.todo-body > .todo-title > p{
+    grid-area:t;
+}
+
+.todo-body > .todo-title > p.check{
+    text-decoration:line-through;
+    color:red;
+}
+
+.todo-body > .todo-title > a{
+    grid-area:b;
+}
+
+.todo-footer{
+    grid-area:f;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 3rem 0 3rem;
+    background:rgb(209, 205, 205);
+}
+
+.todo-footer > a > button{
+    font-size:20px;
+    width:8rem;
+    height:2.5rem;
+    transition:1s;
+    border:1px solid black;
+    cursor:pointer;
+    background:linear-gradient(120deg,rgb(212, 39, 39),rgb(211, 93, 113));
+    color:#fff;
+}
+
+.todo-footer > a > button:hover{
+    transform:scale(1.2);
+    border-radius:10px;
+}
